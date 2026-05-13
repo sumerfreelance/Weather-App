@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Weather Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- TOP SECTION -->
+
+        <div class="top">
+
+            <div class="left">
+
+                <div class="temp-section">
+
+                    <img id="weatherIcon" src="https://cdn-icons-png.flaticon.com/512/869/869869.png">
+
+                    <h1 id="temperature">32°</h1>
+
+                    <div class="extra-info">
+
+                        <p>
+                            Humidity:
+                            <span id="humidity">63%</span>
+                        </p>
+
+                        <p>
+                            Wind:
+                            <span id="wind">14 km/h</span>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="right">
+
+                <h1>Weather</h1>
+
+                <p id="city">Karachi</p>
+
+                <p id="description">Sunny</p>
+
+            </div>
+
+        </div>
+
+        <!-- SEARCH -->
+
+        <div class="search-wrapper">
+
+            <div class="search-box">
+
+                <input type="text" id="cityInput" placeholder="Enter city name" autocomplete="off">
+
+                <button onclick="getWeather()">
+                    Search
+                </button>
+
+            </div>
+
+            <div id="suggestions"></div>
+
+        </div>
+
+        <!-- FORECAST -->
+
+        <div class="forecast" id="forecast">
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
