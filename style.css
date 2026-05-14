@@ -88,6 +88,15 @@ body {
     font-weight: bold;
 }
 
+/* WEATHER ICON */
+
+#weatherIcon{
+
+    font-size:110px;
+
+    color:#facc15;
+}
+
 .extra-info {
 
     font-size: 20px;
@@ -225,6 +234,17 @@ body {
     grid-template-columns: repeat(7, 1fr);
 
     gap: 20px;
+}
+
+.forecast-icon{
+
+    font-size:55px;
+
+    color:#facc15;
+
+    margin:15px 0;
+
+    display:block;
 }
 
 .card {
@@ -495,4 +515,184 @@ body {
         height: 220px;
     }
 
+}
+
+/* THEME TOGGLE */
+
+#themeToggle {
+
+    background: #374151;
+
+    border: none;
+
+    color: white;
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 50%;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    margin-bottom: 20px;
+
+    transition: 0.3s;
+}
+
+#themeToggle:hover {
+
+    transform: scale(1.1);
+}
+
+/* LIGHT MODE */
+
+body.light-mode {
+
+    background: #e5e7eb;
+
+    color: black;
+}
+
+body.light-mode .container {
+
+    background: white;
+
+    color: black;
+}
+
+body.light-mode .card {
+
+    background: #f3f4f6;
+
+    color: black;
+}
+
+body.light-mode .search-box input {
+
+    background: #e5e7eb;
+
+    color: black;
+}
+
+body.light-mode .search-box button {
+
+    background: #facc15;
+
+    color: black;
+}
+
+body.light-mode .extra-info,
+body.light-mode .right p {
+
+    color: #374151;
+}
+
+body.light-mode .chart-container {
+
+    background: #f3f4f6;
+}
+
+body.light-mode .tab {
+
+    color: black;
+}
+
+body.light-mode #suggestions {
+
+    background: white;
+
+    color: black;
+}
+
+body.light-mode .suggestion-item {
+
+    border-bottom: 1px solid #d1d5db;
+}
+
+body.light-mode .suggestion-item:hover {
+
+    background: #f3f4f6;
+}
+
+body.light-mode .aqi-card{
+
+    background:#f3f4f6;
+
+    color:black;
+}
+
+/* AQI CARD */
+
+.aqi-card{
+
+    background:#374151;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    margin-bottom:30px;
+}
+
+.aqi-card h2{
+
+    margin-bottom:10px;
+}
+
+.aqi-card p{
+
+    font-size:28px;
+
+    font-weight:bold;
+}
+
+.aqi-card i{
+
+    margin-right:10px;
+}
+
+#themeToggle i{
+
+    font-size:22px;
+}
+
+/* THEME ICON COLORS */
+
+.fa-sun{
+
+    color:#facc15;
+}
+
+.fa-moon{
+
+    color:#60a5fa;
+}
+
+/* AQI ICON COLORS */
+
+.fa-leaf{
+
+    color:#22c55e;
+}
+
+.fa-cloud-sun{
+
+    color:#f59e0b;
+}
+
+.fa-smog{
+
+    color:#ef4444;
+}
+
+.fa-sun,
+.fa-moon,
+.fa-leaf,
+.fa-cloud-sun,
+.fa-smog{
+
+    filter: drop-shadow(0 0 6px rgba(255,255,255,0.2));
 }

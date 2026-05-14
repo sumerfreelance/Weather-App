@@ -276,8 +276,84 @@ async function getWeather() {
         document.getElementById("wind").innerHTML =
             current.windspeedKmph + " km/h";
 
-        document.getElementById("weatherIcon").src =
-            current.weatherIconUrl[0].value;
+        /* DYNAMIC WEATHER ICON */
+
+        const weatherIcon =
+            document.getElementById("weatherIcon");
+
+        const weatherText =
+            current.weatherDesc[0].value.toLowerCase();
+
+        if (weatherText.includes("sun")) {
+
+            weatherIcon.className =
+                "wi wi-day-sunny";
+
+        }
+
+        else if (weatherText.includes("cloud")) {
+
+            weatherIcon.className =
+                "wi wi-cloudy";
+
+        }
+
+        else if (weatherText.includes("rain")) {
+
+            weatherIcon.className =
+                "wi wi-rain";
+
+        }
+
+        else if (weatherText.includes("storm")) {
+
+            weatherIcon.className =
+                "wi wi-thunderstorm";
+
+        }
+
+        else if (weatherText.includes("snow")) {
+
+            weatherIcon.className =
+                "wi wi-snow";
+
+        }
+
+        else {
+
+            weatherIcon.className =
+                "wi wi-night-clear";
+
+        }
+
+        /* AQI */
+
+        const humidity =
+            parseInt(current.humidity);
+
+        const aqiText =
+            document.getElementById("aqiText");
+
+        if (humidity < 40) {
+
+            aqiText.innerHTML =
+                '<i class="fa-solid fa-leaf"></i> Good';
+
+        }
+
+        else if (humidity < 70) {
+
+            aqiText.innerHTML =
+                '<i class="fa-solid fa-cloud-sun"></i> Moderate';
+
+        }
+
+        else {
+
+            aqiText.innerHTML =
+                '<i class="fa-solid fa-smog"></i> Unhealthy';
+
+        }
 
         // FORECAST
 
@@ -315,7 +391,7 @@ async function getWeather() {
 
             <h2>${dayName}</h2>
 
-            <img src="${icon}">
+            <i class="wi wi-day-cloudy forecast-icon"></i>
 
             <p>${maxTemp}°</p>
 
@@ -591,3 +667,52 @@ function showChart(type) {
     createChart(labels, dataValues, labelText);
 
 }
+
+/* DARK LIGHT MODE */
+
+const themeToggle =
+    document.getElementById("themeToggle");
+
+themeToggle.addEventListener("click", () => {
+
+    document.body.classList.toggle("light-mode");
+
+    // CHANGE ICON
+
+    if (document.body.classList.contains("light-mode")) {
+
+        themeToggle.innerHTML =
+            '<i class="fa-solid fa-sun"></i>';
+
+        localStorage.setItem("theme", "light");
+
+    }
+
+    else {
+
+        themeToggle.innerHTML =
+            '<i class="fa-solid fa-moon"></i>';
+
+        localStorage.setItem("theme", "dark");
+
+    }
+
+});
+
+/* SAVE THEME */
+
+window.addEventListener("load", () => {
+
+    const savedTheme =
+        localStorage.getItem("theme");
+
+    if (savedTheme === "light") {
+
+        document.body.classList.add("light-mode");
+
+        themeToggle.innerHTML =
+            '<i class="fa-solid fa-sun"></i>';
+
+    }
+
+});

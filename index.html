@@ -10,6 +10,8 @@
     <title>Weather Dashboard</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -27,7 +29,7 @@
 
                 <div class="temp-section">
 
-                    <img id="weatherIcon" src="https://cdn-icons-png.flaticon.com/512/869/869869.png">
+                    <img id="weatherIcon" src="wi wi-day-sunny">
 
                     <h1 id="temperature">32°</h1>
 
@@ -51,6 +53,12 @@
 
             <div class="right">
 
+                <button id="themeToggle">
+
+                    <i class="fa-solid fa-moon"></i>
+
+                </button>
+
                 <h1>Weather</h1>
 
                 <p id="city">Karachi</p>
@@ -58,6 +66,18 @@
                 <p id="description">Sunny</p>
 
             </div>
+
+        </div>
+
+        <!-- AQI -->
+
+        <div class="aqi-card">
+
+            <h2>Air Quality Index</h2>
+
+            <p id="aqiText">
+                Good
+            </p>
 
         </div>
 
