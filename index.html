@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="style.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
@@ -74,6 +76,32 @@
             </div>
 
             <div id="suggestions"></div>
+
+        </div>
+
+        <!-- WEATHER TABS -->
+
+        <div class="weather-tabs">
+
+            <button class="tab active" onclick="showChart('temp')">
+                Temperature
+            </button>
+
+            <button class="tab" onclick="showChart('humidity')">
+                Precipitation
+            </button>
+
+            <button class="tab" onclick="showChart('wind')">
+                Wind
+            </button>
+
+        </div>
+
+        <!-- CHART -->
+
+        <div class="chart-container">
+
+            <canvas id="weatherChart"></canvas>
 
         </div>
 

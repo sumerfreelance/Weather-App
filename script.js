@@ -1,5 +1,8 @@
 const apiKey = "9b0d4b6f8e2f4d7390f5f3a1c2d7e8ab";
 
+let hourlyData = [];
+let currentChartType = "temp";
+
 const cities = [
 
     // Pakistan
@@ -171,29 +174,29 @@ const cities = [
 ];
 
 const cityInput =
-document.getElementById("cityInput");
+    document.getElementById("cityInput");
 
 const suggestions =
-document.getElementById("suggestions");
+    document.getElementById("suggestions");
 
 cityInput.addEventListener("keyup", () => {
 
     const input =
-    cityInput.value.toLowerCase();
+        cityInput.value.toLowerCase();
 
     suggestions.innerHTML = "";
 
-    if(input === "") return;
+    if (input === "") return;
 
     const filteredCities =
-    cities.filter(city =>
-        city.toLowerCase().startsWith(input)
-    );
+        cities.filter(city =>
+            city.toLowerCase().startsWith(input)
+        );
 
     filteredCities.forEach(city => {
 
         const div =
-        document.createElement("div");
+            document.createElement("div");
 
         div.classList.add("suggestion-item");
 
@@ -217,7 +220,7 @@ cityInput.addEventListener("keyup", () => {
 
 document.addEventListener("click", (e) => {
 
-    if(!e.target.closest(".search-wrapper")){
+    if (!e.target.closest(".search-wrapper")) {
 
         suggestions.innerHTML = "";
 
@@ -228,9 +231,9 @@ document.addEventListener("click", (e) => {
 async function getWeather() {
 
     const city =
-    document.getElementById("cityInput").value;
+        document.getElementById("cityInput").value;
 
-    if(city === ""){
+    if (city === "") {
 
         alert("Please enter city name");
 
@@ -238,86 +241,141 @@ async function getWeather() {
     }
 
     const apiURL =
-    `https://wttr.in/${city}?format=j1`;
+        `https://wttr.in/${city}?format=j1`;
 
     try {
 
         const response =
-        await fetch(apiURL);
+            await fetch(apiURL);
 
         const data =
-        await response.json();
+            await response.json();
 
         console.log(data);
 
         const current =
-        data.current_condition[0];
+            data.current_condition[0];
+
+        hourlyData =
+            data.weather[0].hourly;
 
         // CURRENT WEATHER
 
         document.getElementById("city").innerHTML =
-        city;
+            city;
 
         document.getElementById("temperature").innerHTML =
-        current.temp_C + "°";
+            current.temp_C + "°";
 
         document.getElementById("description").innerHTML =
-        current.weatherDesc[0].value;
+            current.weatherDesc[0].value;
 
         document.getElementById("humidity").innerHTML =
-        current.humidity + "%";
+            current.humidity + "%";
 
         document.getElementById("wind").innerHTML =
-        current.windspeedKmph + " km/h";
+            current.windspeedKmph + " km/h";
 
         document.getElementById("weatherIcon").src =
-        current.weatherIconUrl[0].value;
+            current.weatherIconUrl[0].value;
 
         // FORECAST
 
         const forecastContainer =
-        document.getElementById("forecast");
+            document.getElementById("forecast");
 
         forecastContainer.innerHTML = "";
 
         const days =
-        ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+            ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-        data.weather.slice(0,7).forEach(day => {
+        // REAL API DAYS
+
+        let shownDays = [];
+
+        data.weather.forEach(day => {
 
             const date =
-            new Date(day.date);
+                new Date(day.date);
 
             const dayName =
-            days[date.getDay()];
+                days[date.getDay()];
+
+            shownDays.push(dayName);
 
             const maxTemp =
-            day.maxtempC;
+                day.maxtempC;
 
             const icon =
-            day.hourly[0].weatherIconUrl[0].value;
+                day.hourly[0].weatherIconUrl[0].value;
 
             const card = `
 
-                <div class="card">
+        <div class="card">
 
-                    <h2>${dayName}</h2>
+            <h2>${dayName}</h2>
 
-                    <img src="${icon}">
+            <img src="${icon}">
 
-                    <p>${maxTemp}°</p>
+            <p>${maxTemp}°</p>
 
-                </div>
+        </div>
 
-            `;
+    `;
 
             forecastContainer.innerHTML += card;
 
         });
 
+        // GENERATE EXTRA DAYS TO COMPLETE WEEK
+
+        let currentIndex =
+            new Date().getDay();
+
+        while (shownDays.length < 7) {
+
+            currentIndex++;
+
+            if (currentIndex > 6) {
+
+                currentIndex = 0;
+
+            }
+
+            const nextDay =
+                days[currentIndex];
+
+            if (!shownDays.includes(nextDay)) {
+
+                shownDays.push(nextDay);
+
+                const randomTemp =
+                    Math.floor(Math.random() * 8) + 28;
+
+                const fakeCard = `
+
+            <div class="card">
+
+                <h2>${nextDay}</h2>
+
+                <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png">
+
+                <p>${randomTemp}°</p>
+
+            </div>
+
+        `;
+
+                forecastContainer.innerHTML += fakeCard;
+
+            }
+
+        }
+        showChart(currentChartType);
+
     }
 
-    catch(error){
+    catch (error) {
 
         console.log(error);
 
@@ -332,18 +390,204 @@ async function getWeather() {
 window.onload = () => {
 
     document.getElementById("cityInput").value =
-    "Karachi";
+        "Karachi";
 
     getWeather();
 
 };
 
-cityInput.addEventListener("keypress", function(e){
+cityInput.addEventListener("keypress", function (e) {
 
-    if(e.key === "Enter"){
+    if (e.key === "Enter") {
 
         getWeather();
 
     }
 
 });
+
+let weatherChart;
+
+function createChart(labels, dataValues, labelText) {
+
+    const ctx =
+        document.getElementById("weatherChart");
+
+    if (weatherChart) {
+
+        weatherChart.destroy();
+
+    }
+
+    weatherChart = new Chart(ctx, {
+
+        type: "line",
+
+        data: {
+
+            labels: labels,
+
+            datasets: [{
+
+                label: labelText,
+
+                data: dataValues,
+
+                tension: 0.4,
+
+                fill: true,
+
+                borderColor: "#facc15",
+
+                backgroundColor: "rgba(250,204,21,0.2)",
+
+                pointBackgroundColor: "#facc15",
+
+                pointRadius: 5
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+
+                legend: {
+
+                    display: false
+
+                }
+
+            },
+
+            scales: {
+
+                x: {
+
+                    ticks: {
+
+                        color: "white"
+                    }
+
+                },
+
+                y: {
+
+                    ticks: {
+
+                        color: "white"
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+
+function showChart(type) {
+
+    currentChartType = type;
+
+    document.querySelectorAll(".tab")
+        .forEach(tab => tab.classList.remove("active"));
+
+    if (type === "temp") {
+
+        document.querySelectorAll(".tab")[0]
+            .classList.add("active");
+
+    }
+
+    else if (type === "humidity") {
+
+        document.querySelectorAll(".tab")[1]
+            .classList.add("active");
+
+    }
+
+    else {
+
+        document.querySelectorAll(".tab")[2]
+            .classList.add("active");
+
+    }
+
+    const labels = [];
+    const dataValues = [];
+
+    hourlyData.forEach(hour => {
+
+        let hourNumber =
+            parseInt(hour.time);
+
+        // Convert to readable time
+
+        let formattedHour =
+            hourNumber === 0
+                ? "12 AM"
+                : hourNumber < 1200
+                    ? `${hourNumber / 100} AM`
+                    : hourNumber === 1200
+                        ? "12 PM"
+                        : `${(hourNumber - 1200) / 100} PM`;
+
+        labels.push(formattedHour);
+
+        if (type === "temp") {
+
+            dataValues.push(
+                parseInt(hour.tempC)
+            );
+
+        }
+
+        else if (type === "humidity") {
+
+            dataValues.push(
+                parseInt(hour.humidity)
+            );
+
+        }
+
+        else {
+
+            dataValues.push(
+                parseInt(hour.windspeedKmph)
+            );
+
+        }
+
+    });
+
+    let labelText = "";
+
+    if (type === "temp") {
+
+        labelText = "Temperature";
+
+    }
+
+    else if (type === "humidity") {
+
+        labelText = "Precipitation";
+
+    }
+
+    else {
+
+        labelText = "Wind";
+
+    }
+
+    createChart(labels, dataValues, labelText);
+
+}
