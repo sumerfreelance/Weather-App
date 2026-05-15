@@ -1,20 +1,19 @@
-# Weather-App
-
-# Weather Dashboard README
-
-````md id="mw9f8q"
 # 🌦 Weather Dashboard
 
 A modern and responsive Weather Dashboard web application built using HTML, CSS, and JavaScript.
 
 This project allows users to search for cities and view:
+
 - Current weather conditions
 - Temperature
 - Humidity
 - Wind speed
-- Weather description
 - Weekly weather forecast
+- Dynamic weather icons
+- AQI status
+- Interactive weather charts
 - Dynamic city search suggestions
+- Dark / Light mode support
 
 ---
 
@@ -22,13 +21,19 @@ This project allows users to search for cities and view:
 
 ✅ Real-time weather data  
 ✅ Dynamic weekly forecast  
-✅ Search city weather  
-✅ Auto city suggestions dropdown  
-✅ Responsive modern UI  
-✅ Weather icons  
-✅ API integration  
+✅ Smart city search suggestions  
+✅ Dynamic weather icons  
+✅ Air Quality Index (AQI)  
+✅ Temperature analytics chart  
+✅ Precipitation analytics chart  
+✅ Wind analytics chart  
+✅ Dark / Light mode toggle  
+✅ LocalStorage theme saving  
+✅ Interactive charts using Chart.js  
+✅ Fully responsive modern UI  
+✅ Weather API integration  
 ✅ Mobile-friendly design  
-✅ Interactive cards and hover effects  
+✅ Hover animations and effects  
 
 ---
 
@@ -37,38 +42,40 @@ This project allows users to search for cities and view:
 - HTML5
 - CSS3
 - JavaScript (ES6)
-- OpenWeatherMap API
+- Chart.js
+- Weather Icons CDN
+- Font Awesome
+- wttr.in Weather API
 - Fetch API
+- Local Storage
 
 ---
 
 # 📂 Project Structure
 
 ```plaintext
-weather-dashboard/
+Weather-App/
 │
 ├── index.html
 ├── style.css
-└── script.js
-````
+├── script.js
+└── README.md
+```
 
 ---
 
 # 🚀 How To Run The Project
 
 ## Step 1
-
 Download or clone the project.
 
 ## Step 2
-
 Open the project folder.
 
 ## Step 3
-
 Run `index.html` in browser.
 
-OR
+### OR
 
 Use VS Code Live Server extension.
 
@@ -76,110 +83,199 @@ Use VS Code Live Server extension.
 
 # 🔑 API Setup
 
-This project uses OpenWeatherMap API.
+This project uses:
 
-## Create Free API Key
+## wttr.in Weather API
 
-Visit:
-
-[https://openweathermap.org/api](https://openweathermap.org/api)
-
-1. Create account
-2. Generate API key
-3. Copy API key
-4. Replace inside `script.js`
-
-```javascript
-const apiKey = "YOUR_API_KEY";
+```bash
+https://wttr.in/
 ```
+
+No API key required.
+
+Weather data is fetched dynamically using Fetch API.
 
 ---
 
 # 🌍 Main Functionalities
 
-## Current Weather
+# 🌡 Current Weather
 
 Displays:
 
-* Current temperature
-* Humidity
-* Wind speed
-* Weather condition
-* Weather icon
+- Current temperature
+- Weather condition
+- Humidity
+- Wind speed
+- Dynamic weather icon
 
-## Weekly Forecast
+---
 
-Displays weather cards for upcoming days.
+# 📅 Weekly Forecast
 
-## Search Suggestions
+Displays weather forecast cards for upcoming 7 days.
+
+Each card includes:
+
+- Day name
+- Weather icon
+- Temperature
+
+---
+
+# 🔎 Search Suggestions
 
 As user types city name:
 
-* Matching cities appear in dropdown
-* User can click city to search instantly
+- Matching cities appear instantly
+- Dropdown suggestions are shown
+- User can click city to search quickly
+- Enter key support included
+
+---
+
+# 📊 Weather Analytics Charts
+
+Interactive weather charts built using Chart.js.
+
+### Includes:
+
+## Temperature Chart
+Shows hourly temperature analytics.
+
+## Precipitation Chart
+Shows humidity/precipitation levels.
+
+## Wind Chart
+Shows wind speed analytics.
+
+### Features:
+- Dynamic chart switching
+- Responsive chart rendering
+- Dark/Light theme support
+- Dynamic axis colors
+
+---
+
+# 🌬 Air Quality Index (AQI)
+
+Displays AQI status dynamically:
+
+- 🌿 Good
+- ⛅ Moderate
+- 🌫 Unhealthy
+
+Includes colorful professional icons.
+
+---
+
+# 🌙 Dark / Light Mode
+
+Includes modern theme toggle system.
+
+### Features:
+- Dark mode
+- Light mode
+- Dynamic UI switching
+- Theme saved in Local Storage
+- Dynamic chart theme updates
+
+---
+
+# 🎨 Dynamic Weather Icons
+
+Uses professional weather icon libraries.
+
+Icons automatically change according to weather conditions:
+
+- Sunny
+- Cloudy
+- Rainy
+- Snow
+- Storm
+- Night weather
 
 ---
 
 # 📱 Responsive Design
 
-The application is fully responsive and works on:
+The application is fully responsive and optimized for:
 
-* Desktop
-* Laptop
-* Tablet
-* Mobile devices
+- Desktop
+- Laptop
+- Tablet
+- Mobile devices
 
 ---
 
 # 🎨 UI Features
 
-* Dark modern theme
-* Interactive weather cards
-* Smooth hover effects
-* Modern search bar
-* Responsive layout
+- Modern dashboard design
+- Dark futuristic interface
+- Interactive weather cards
+- Smooth hover effects
+- Responsive layouts
+- Dynamic icon system
+- Modern search UI
+- Adaptive charts
+- Clean animations
 
 ---
 
 # 📖 JavaScript Concepts Used
 
-* Async/Await
-* Fetch API
-* DOM Manipulation
-* Event Listeners
-* Array Filtering
-* Dynamic Rendering
-* API Handling
+- Async/Await
+- Fetch API
+- DOM Manipulation
+- Event Listeners
+- Array Filtering
+- Dynamic Rendering
+- API Handling
+- Chart Rendering
+- Local Storage
+- Theme Management
 
 ---
 
 # 📷 Screenshots
 
 ## Main Dashboard
+Displays:
+- Current weather
+- AQI
+- Charts
+- Weekly forecast
 
-Displays current weather and weekly forecast.
+---
 
 ## Search Suggestions
+Dynamic city dropdown while typing.
 
-Dynamic dropdown while typing city names.
+---
+
+## Dark / Light Mode
+Theme switching with adaptive UI.
 
 ---
 
 # 🔮 Future Improvements
 
-* Dark/Light mode toggle
-* GPS location weather
-* Hourly forecast
-* Weather animations
-* Voice search
-* Air quality index
-* Sunrise/Sunset timings
+Planned future features:
+
+- GPS location weather
+- Hourly forecast slider
+- Weather animations
+- Sunrise & Sunset timings
+- Voice search
+- Live radar
+- Weather alerts
+- Multi-language support
 
 ---
 
 # 👨‍💻 Developed By
 
-Syed Umer Shah
+## Syed Umer Shah
 
 6th Semester Web Engineering Lab Project
 
